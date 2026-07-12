@@ -1,0 +1,20 @@
+[package]
+name = "nwep-sys"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+links = "nwep"
+description = "raw ffi declarations for libnwep, layer 0 of the rust binding for the web/1 protocol."
+repository = "https://github.com/levresearch/nwep-rs"
+
+[features]
+# trust links libnwep (the full build, with the bls trust layer + blst) instead
+# of libnwep_core. off by default so consumers who do not verify anchors do not
+# pay for blst.
+trust = []
+
+[build-dependencies]
+# resolves installer default lib paths (home_dir, data_local_dir) portably.
+dirs = "5"
+# probes pkg-config on Linux for installed nwep (the installer writes nwep.pc).
+pkg-config = "0.3"

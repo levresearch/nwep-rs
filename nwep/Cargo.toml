@@ -1,0 +1,28 @@
+[package]
+name = "nwep"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "idiomatic rust bindings for the web/1 protocol over quic."
+repository = "https://github.com/levresearch/nwep-rs"
+
+[dependencies]
+nwep-sys = { path = "../nwep-sys", version = "0.1.0" }
+# the managed (L2) runtime. async surface + the owner-thread poll. optional so
+# L1-only users do not pay for tokio NWG0200 NWG1200.
+tokio = { version = "1", features = ["rt", "rt-multi-thread", "sync", "time", "macros"], optional = true }
+libc = { version = "0.2", optional = true }
+
+[dev-dependencies]
+# tests that hand-drive an event loop need poll(2), independent of features.
+libc = "0.2"
+
+[features]
+# the bindings ship libnwep (the full trust build), so trust is on by default and
+# the default build links libnwep + blst. a consumer that does not verify anchors
+# opts into the lean libnwep_core with `--no-default-features --features runtime`.
+default = ["runtime", "trust"]
+# runtime is the managed L2 layer (Server::serve, Client::connect_async).
+runtime = ["dep:tokio", "dep:libc"]
+# trust pulls in the bls anchor + merkle trust layer (links libnwep, blst).
+trust = ["nwep-sys/trust"]
