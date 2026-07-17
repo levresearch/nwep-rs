@@ -2,7 +2,7 @@
 // (libnwep-full.a with the trust feature, else libnwep_core-full.a) - one archive
 // that already bundles the c deps (BoringSSL, ngtcp2, zstd, +blst) and zig's
 // libc++/libc++abi, so the binding produces a self-contained binary with no
-// runtime .so to ship (PORTABILITY.md).
+// runtime .so to ship NWG1200.
 //
 // resolution order, first match wins
 //  1. NWEP_LIB_DIR - explicit override; on Windows the installer sets this.
