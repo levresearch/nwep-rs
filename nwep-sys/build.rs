@@ -37,11 +37,12 @@ fn main() {
         Some(dir) => dir,
         None => {
             let hint = if target_os == "windows" {
-                "Install nwep with the GUI installer - it sets NWEP_LIB_DIR automatically.\n\
+                "Install nwep with the GUI installer (http://pkg.rebuildtheinter.net/tools/latest/)\n\
+                 - it sets NWEP_LIB_DIR automatically.\n\
                  Or set NWEP_LIB_DIR manually to the directory containing the .a files."
             } else {
-                "Install nwep with the GUI installer, or set PKG_CONFIG_PATH to\n\
-                 ~/.local/lib/pkgconfig if you used a user-scope install.\n\
+                "Install nwep with the GUI installer (http://pkg.rebuildtheinter.net/tools/latest/),\n\
+                 or set PKG_CONFIG_PATH to ~/.local/lib/pkgconfig if you used a user-scope install.\n\
                  You can also set NWEP_LIB_DIR or run `zig build` in the repo root."
             };
             panic!(
